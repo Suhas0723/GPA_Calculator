@@ -18,6 +18,7 @@ def home():
     return redirect(url_for('NinthGradeGPA'))
 
 @app.route('/ninth-grade-gpa', methods =["GET", "POST"])
+
 def NinthGradeGPA():
     global weightedTotalCredits
     global unweightedTotalCredits
