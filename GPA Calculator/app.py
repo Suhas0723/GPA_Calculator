@@ -108,7 +108,6 @@ def tenthGradeGPA():
     global unWeightedGpa10
     if request.method == "POST":
         counter = int(request.form.get("counter"))
-        
         classType = ""
         classGrade = 0
         grades = []
@@ -150,11 +149,9 @@ def tenthGradeGPA():
                     weightedGrades.append(0)
         if len(weightedGrades) == 0:
             return render_template("tenth.html", error="You must enter atleast 2 grades to calculate!")
-
         weightedGpa10 = sum(weightedGrades)/len(weightedGrades)
         weightedTotalCredits = weightedTotalCredits + weightedGrades
         CWgpa = sum(weightedTotalCredits)/len(weightedTotalCredits)
-
         for i in range(0, len(grades)):
             if (grades[i] >= 90):
                 unWeightedGrades.append(4)
@@ -168,7 +165,6 @@ def tenthGradeGPA():
         unWeightedGpa10 = sum(unWeightedGrades)/len(unWeightedGrades)
         unweightedTotalCredits = unweightedTotalCredits + unWeightedGrades
         CUgpa = sum(unweightedTotalCredits)/len(unweightedTotalCredits)
-
         return render_template("tenth.html", ninth=str(weightedGpa9) + " " + str(unWeightedGpa9), tenth=str(weightedGpa10) + " " + str(unWeightedGpa10), totalW=CWgpa, totalU = CUgpa)
     else:
         return render_template("tenth.html")
@@ -184,10 +180,8 @@ def eleventhGradeGPA():
     global unWeightedGpa10
     global weightedGpa11
     global unWeightedGpa11
-
     if request.method == "POST":
         counter = int(request.form.get("counter"))
-        
         classType = ""
         classGrade = 0
         grades = []
@@ -204,13 +198,10 @@ def eleventhGradeGPA():
                 if ((classType == "ap" or classType == "ib" or classType == "dual" or classType == "regular" or classType == "honors") and (classGrade >= 0 and classGrade <= 100)):
                     classTypes.append(classType)
                     grades.append(classGrade)
-                
                 else: 
                    return render_template("eleventh.html", error="Invalid class type or invalid grade!")
             else:
                 continue
-
-
         for i in range(0, len(grades)):
             if (classTypes[i] == "ap" or classTypes[i] == "ib" or classTypes[i] == "dual"):
                 if (grades[i] >= 90):
@@ -230,15 +221,11 @@ def eleventhGradeGPA():
                     weightedGrades.append(2)
                 else:
                     weightedGrades.append(0)
-                
         if len(weightedGrades) == 0:
             return render_template("eleventh.html", error="You must enter atleast 2 grades to calculate!")
-
         weightedGpa11 = sum(weightedGrades)/len(weightedGrades)
         weightedTotalCredits = weightedTotalCredits + weightedGrades
         CWgpa = sum(weightedTotalCredits)/len(weightedTotalCredits)
-
-
         for i in range(0, len(grades)):
             if (grades[i] >= 90):
                 unWeightedGrades.append(4)
@@ -248,12 +235,9 @@ def eleventhGradeGPA():
                 unWeightedGrades.append(2)
             else:
                 unWeightedGrades.append(0)
-
         unWeightedGpa11 = sum(unWeightedGrades)/len(unWeightedGrades)
         unweightedTotalCredits = unweightedTotalCredits + unWeightedGrades
         CUgpa = sum(unweightedTotalCredits)/len(unweightedTotalCredits)
-        
-
         return render_template("eleventh.html", ninth=str(weightedGpa9) + " " + str(unWeightedGpa9), tenth=str(weightedGpa10) + " " + str(unWeightedGpa10), eleventh = str(weightedGpa11) + " " + str(unWeightedGpa11), totalW=CWgpa, totalU = CUgpa)
     else:
         return render_template("eleventh.html")
@@ -268,10 +252,8 @@ def twelfthGradeGPA():
     global unWeightedGpa10
     global weightedGpa11
     global unWeightedGpa11
-
     if request.method == "POST":
         counter = int(request.form.get("counter"))
-        
         classType = ""
         classGrade = 0
         grades = []
@@ -288,13 +270,10 @@ def twelfthGradeGPA():
                 if ((classType == "ap" or classType == "ib" or classType == "dual" or classType == "regular" or classType == "honors") and (classGrade >= 0 and classGrade <= 100)):
                     classTypes.append(classType)
                     grades.append(classGrade)
-                
                 else: 
                    return render_template("twelfth.html", error="Invalid class type or invalid grade!")
             else:
                 continue
-
-
         for i in range(0, len(grades)):
             if (classTypes[i] == "ap" or classTypes[i] == "ib" or classTypes[i] == "dual"):
                 if (grades[i] >= 90):
@@ -314,15 +293,11 @@ def twelfthGradeGPA():
                     weightedGrades.append(2)
                 else:
                     weightedGrades.append(0)
-
         if len(weightedGrades) == 0:
             return render_template("twelfth.html", error="You must enter atleast 2 grades to calculate!")
-        
         weightedGpa12 = sum(weightedGrades)/len(weightedGrades)
         weightedTotalCredits = weightedTotalCredits + weightedGrades
         CWgpa = sum(weightedTotalCredits)/len(weightedTotalCredits)
-
-
         for i in range(0, len(grades)):
             if (grades[i] >= 90):
                 unWeightedGrades.append(4)
@@ -332,12 +307,9 @@ def twelfthGradeGPA():
                 unWeightedGrades.append(2)
             else:
                 unWeightedGrades.append(0)
-
         unWeightedGpa12 = sum(unWeightedGrades)/len(unWeightedGrades)
         unweightedTotalCredits = unweightedTotalCredits + unWeightedGrades
         CUgpa = sum(unweightedTotalCredits)/len(unweightedTotalCredits)
-        
-
         return render_template("twelfth.html", ninth=str(weightedGpa9) + " " + str(unWeightedGpa9), tenth=str(weightedGpa10) + " " + str(unWeightedGpa10), eleventh = str(weightedGpa11) + " " + str(unWeightedGpa11), twelfth = str(weightedGpa12) + " " + str(unWeightedGpa12), totalW=CWgpa, totalU = CUgpa)
     else:
         return render_template("twelfth.html")
