@@ -125,12 +125,10 @@ def tenthGradeGPA():
                 if ((classType == "ap" or classType == "ib" or classType == "dual" or classType == "regular" or classType == "honors") and (classGrade >= 0 and classGrade <= 100)):
                     classTypes.append(classType)
                     grades.append(classGrade)
-                
                 else: 
                    return render_template("tenth.html", error="Invalid class type or invalid grade!")
             else:
                 continue
-
         for i in range(0, len(grades)):
             if (classTypes[i] == "ap" or classTypes[i] == "ib" or classTypes[i] == "dual"):
                 if (grades[i] >= 90):
@@ -150,14 +148,12 @@ def tenthGradeGPA():
                     weightedGrades.append(2)
                 else:
                     weightedGrades.append(0)
-
         if len(weightedGrades) == 0:
             return render_template("tenth.html", error="You must enter atleast 2 grades to calculate!")
 
         weightedGpa10 = sum(weightedGrades)/len(weightedGrades)
         weightedTotalCredits = weightedTotalCredits + weightedGrades
         CWgpa = sum(weightedTotalCredits)/len(weightedTotalCredits)
-
 
         for i in range(0, len(grades)):
             if (grades[i] >= 90):
