@@ -131,7 +131,6 @@ def tenthGradeGPA():
             else:
                 continue
 
-
         for i in range(0, len(grades)):
             if (classTypes[i] == "ap" or classTypes[i] == "ib" or classTypes[i] == "dual"):
                 if (grades[i] >= 90):
