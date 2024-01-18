@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPA Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="static/style.css">
     <!-- Latest compiled and minified CSS -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,14 +25,44 @@
         <a href="/tenth-grade-gpa" class="btn btn-info mt-3">10th GPA</a>
         <a href="/eleventh-grade-gpa" class="btn btn-info mt-3">11th GPA</a>
         <a href="/twelfth-grade-gpa" class="btn btn-info mt-3">12th GPA</a>
+        <button type="button" class="btn btn-primary mt-3" data-toggle="modal">Help</button>
+        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Instructions</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This GPA calculator allows you to calculate your grade point average based on your course grades.</p>
+                        <p>Follow these steps:</p>
+                        <ol>
+                            <li>Choose the class type from the dropdown.</li>
+                            <li>Enter your grade for the class.</li>
+                            <li>Click "Add Class" to add more classes if needed.</li>
+                            <li>Click "Delete Class" to remove a class.</li>
+                            <li>Click "Submit" to calculate your GPA.</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card shadow w-25 mt-3">
             <form method="post" action="/twelfth-grade-gpa">
                 <div id="input-fields" class="form-group w-75 p-2">
-                    <h1 class="mt-2">Twelfth Grade GPA</h1>
+                    <h1 class="mt-2">12th Grade GPA</h1>
                     <div id="input-group-0">
-                        <input type="text" class="form-control mb-2" name="class-1" id="class-1" placeholder="Class Type">
+                        <select id="class-1" name="class-1" class="form-control form-select form-select-md mb-2">
+                            <option value="credit5">DE/AP/IB</option>
+                            <option value="credit4">Honors/On-Level</option>
+                        </select>
                         <input type="text" class="form-control mb-3" name="grade-1" id="grade-1" placeholder="Grade">
-                        <p>____________________________</p>
+                        <hr>
                     </div>
                 </div>
                 <div class="pb-2">
@@ -48,72 +78,61 @@
 
 
     {% if error %}
-        <center>
-            <div class="alert alert-danger mt-3 w-25 border rounded">
-                <p class="error">{{ error }}</p>
-            </div>
-        </center>
+    <center>
+        <div class="alert alert-danger mt-3 w-25 border rounded">
+            <p class="error">{{ error }}</p>
+        </div>
+    </center>
     {% endif %}
 
-    {% if ninth %}
-        <center>
-            <div class="alert alert-success mt-3 w-25 border rounded">
+    {% if totalW or totalU %}
+    <center>
+        <div class="alert alert-success mt-3 w-25 border rounded">
+            {% if totalW %}
+                <p class="totalW">Total Weighted: {{ totalW }}</p>
+            {% endif %}
 
-                <p class="ninth">Ninth Weighted and Unweighted: {{ ninth }}</p>
-
-                {% if tenth %}
-                    <p class="tenth">Tenth Weighted and Unweighted: {{ tenth }}</p>
-                {% endif %}
-
-                {% if eleventh %}
-                    <p class="eleventh">Eleventh Weighted and Unweighted: {{ eleventh }}</p>
-                {% endif %}
-
-                {% if eleventh %}
-                    <p class="twelfth">Twelfth Weighted and Unweighted: {{ twelfth }}</p>
-                {% endif %}
-
-                {% if totalW %}
-                    <p class="totalW">Total Weighted: {{ totalW }}</p>
-                {% endif %}
-            
-                {% if totalU %}
-                    <p class="totalU">Total Unweighted: {{ totalU }}</p>
-                {% endif %}
-            </div>
-        </center>
+            {% if totalU %}
+                <p class="totalU">Total Unweighted: {{ totalU }}</p>
+            {% endif %}
+        </div>
+    </center>
     {% endif %}
+
 
 
     <script>
         let inputCounter = 1;
-
+    
         function addInputField() {
             inputCounter++;
+    
             const inputGroup = document.createElement('div');
             inputGroup.id = `input-group-${inputCounter}`;
-            inputGroup.innerHTML = 
-            `<input type="text" class="form-control mb-2" name="class-${inputCounter}" id= "class-${inputCounter}" placeholder="Class Type">
-            <input type="text" class="form-control mb-3" name="grade-${inputCounter}" id= "grade-${inputCounter}" placeholder="Grade">
-            <p>____________________________</p>
-            `;
-
+            inputGroup.innerHTML =
+                `<select id="class-${inputCounter}" name="class-${inputCounter}" class="form-control form-select form-select-md mb-2">
+                    <option value="credit5">DE/AP/IB</option>
+                    <option value="credit4">Honors/On-Level</option>
+                </select>
+                <input type="text" class="form-control mb-3" name="grade-${inputCounter}" id="grade-${inputCounter}" placeholder="Grade">
+                <hr>`;
+    
             document.getElementById("counter").value = inputCounter;
-            console.log(document.getElementById("counter").value);
-            
+    
             document.getElementById('input-fields').appendChild(inputGroup);
         }
-
-        function deleteField()
-        {
-            var course = document.getElementById(`input-group-${inputCounter}`);
-            if(course)
-            {
-                var parentElement = course.parentNode;
-                parentElement.removeChild(course);
-                inputCounter--;
+    
+        function deleteField() {
+            if (inputCounter > 1) {
+                var course = document.getElementById(`input-group-${inputCounter}`);
+                if (course) {
+                    var parentElement = course.parentNode;
+                    parentElement.removeChild(course);
+                    inputCounter--;
+                }
             }
         }
     </script>
+    
 </body>
 </html>
