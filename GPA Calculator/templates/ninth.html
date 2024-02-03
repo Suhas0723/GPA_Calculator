@@ -103,13 +103,20 @@
 
 
     <script>
+    ///the code starts off with one inpiut field
+        
         let inputCounter = 1;
-    
+    ///adding another input field for the user
+        
         function addInputField() {
             inputCounter++;
-    
+
+            ///create a new div for the input group and set its ID
+            
             const inputGroup = document.createElement('div');
             inputGroup.id = `input-group-${inputCounter}`;
+
+            ///Set the inner HTML of the div, adding a select and input element for the new grade
             inputGroup.innerHTML =
                 `<select id="class-${inputCounter}" name="class-${inputCounter}" class="form-control form-select form-select-md mb-2">
                     <option value="credit5">DE/AP/IB</option>
@@ -117,12 +124,15 @@
                 </select>
                 <input type="text" class="form-control mb-3" name="grade-${inputCounter}" id="grade-${inputCounter}" placeholder="Grade">
                 <hr>`;
-    
+
+            ///Update the counter element with the new number of input fields
             document.getElementById("counter").value = inputCounter;
-    
+
+            //Add the new input group to the parent container
             document.getElementById('input-fields').appendChild(inputGroup);
         }
-    
+
+        ///Function to delete the last input field added
         function deleteField() {
             if (inputCounter > 1) {
                 var course = document.getElementById(`input-group-${inputCounter}`);
