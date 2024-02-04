@@ -6,9 +6,13 @@
 - Purpose:
   - This code was created to help fellow students at South Forsyth High School to calculate their GPA and its purpose is to compete for the Introduction to Programming FBLA event.
 - Languages and Libraries Used:
-  - Languages: Python (Back-End), HTML (Front-End), CSS (Front-End), JavaScript (Front-End)
-  - Libraries:
+  - Languages: Python (Back-End), HTML (Front-End), CSS (Front-End), JavaScript (Front-End), SQL (Database)
+  - Libraries/Technologies:
     - **Flask** is a Back-End framework in Python that allows us to route our users to the appropriate pages and also allows us too smoothly connect our front-end and back-end
     - **BootStrap** is a Front-End framework that allows us to create dynamic and responsive webpages and UI.
+    - **AWS RDS** is a cloud database. This allows us to access our data from anywhere across the glove regardless of the device.
+    - **OpenAI/ChatGPT** is the API we used to implement our AI chat assistant.
+    - AWS RDS Documentation: https://docs.aws.amazon.com/rds/
     - Flask Documentation: https://flask.palletsprojects.com/en/3.0.x/
     - BootStrap Documentation: https://getbootstrap.com/
+    - OpenAI Documentation: https://platform.openai.com/docs/introduction
