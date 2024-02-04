@@ -148,13 +148,17 @@
 
     <!--JavaScript for adding and deleting classes-->
     <script>
+        //counter to keep track of how many feilds(classes) there are
         let inputCounter = 1;
 
+        //function to add new input fields
         function addInputField() {
             inputCounter++;
 
             const inputGroup = document.createElement('div');
             inputGroup.id = `input-group-${inputCounter}`;
+
+            //add inputs for things like grades and course name
             inputGroup.innerHTML =
                 `<input type="text" class="form-control mb-3" name="name-${inputCounter}" id="name-${inputCounter}" placeholder="Class Name">
                 <select id="class-${inputCounter}" name="class-${inputCounter}" class="form-control form-select form-select-md mb-2">
@@ -165,11 +169,13 @@
                 <input type="hidden" id="grade-level-${inputCounter}" name="grade-level-${inputCounter}" value="9">
                 <hr>`;
 
+            // keep track of how many fields there are
             document.getElementById("counter").value = inputCounter;
 
             document.getElementById('input-fields').appendChild(inputGroup);
         }
 
+        //removes the last course input fields added
         function deleteField() {
             if (inputCounter > 1) {
                 var course = document.getElementById(`input-group-${inputCounter}`);
