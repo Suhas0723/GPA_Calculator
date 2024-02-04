@@ -3,3 +3,40 @@ hr {
     width: 75%;
     background-color: rgba(0, 0, 0, 0.184);
 }
+
+.alert {
+    background-color: #dff0d8;
+    color: #3c763d;
+  }
+  
+  .alert-heading {
+    color: #2f5d32;
+  }
+  
+  .totalW, .totalU {
+    margin-bottom: 0; 
+  }
+  
+  .font-weight-bold {
+    font-size: 1.2em;
+  }
+  
+  .font-weight-normal {
+    font-size: 1em;
+  }
+  
+  .rounded-pill {
+    border-radius: 50rem !important;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+  }
+
+  .navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); 
+}
+
+.about-section {
+  margin: 20px 0;
+}
