@@ -9,7 +9,7 @@ weightedTotalCredits = []
 unweightedTotalCredits = []
 
 #instantiating database object and conection to AWS SQL DB
-db = pymysql.connect(host='gpa-db.c38eckgmktvd.us-east-2.rds.amazonaws.com', user='admin', password='password', db='gpaData')
+db = pymysql.connect(host='gpa-db.c38eckgmktvd.us-east-2.rds.amazonaws.com', user='admin', password='200723Sd!', db='gpaData')
 cursor = db.cursor()
 
 classId = 1
@@ -22,6 +22,7 @@ def calculate_grades(counter, class_data):
 
     print(class_data)
 
+    #validates the data the user inputs
     for i in range(1, counter + 1):
         classType = str(class_data["class-" + str(i)])
         className = class_data["name-" + str(i)]
@@ -38,6 +39,7 @@ def calculate_grades(counter, class_data):
             return None, None, None, "Grade must be between 0 - 100!"
 
 
+    #converts grades to weighted credits
     for i in range(len(grades)):
         if classTypes[i] == "credit5":
             if grades[i] >= 90:
@@ -64,6 +66,7 @@ def calculate_grades(counter, class_data):
     weightedTotalCredits += weightedGrades
     CWgpa = sum(weightedTotalCredits) / len(weightedTotalCredits)
 
+    #converts grades to unweighted credits
     for i in range(0, len(grades)):
         if (grades[i] >= 90):
             unWeightedGrades.append(4)
@@ -79,6 +82,7 @@ def calculate_grades(counter, class_data):
 
     totalClasses = len(grades)
 
+    #stores data in database
     sql = """insert into `ClassInfo` (classId, className, classCreditWeighted, 
                                     classCreditUnweighted, classType, classGradeLevel)
             values (%s, %s, %s, %s, %s, %s) 
@@ -99,7 +103,9 @@ def render_template_with_error(template, error=None, **kwargs):
 def process_grade_route(route, template):
     global weightedTotalCredits, unweightedTotalCredits
 
+    
     if request.method == "POST":
+        #stores class type
         counter = int(request.form.get("counter"))
 
         class_data = {
@@ -107,6 +113,7 @@ def process_grade_route(route, template):
             for i in range(1, counter + 1)
         }
 
+        #stores grades for each class
         class_data.update(
             {
                 f"grade-{i}": request.form.get(f"grade-{i}") 
@@ -114,6 +121,7 @@ def process_grade_route(route, template):
             }
         )
 
+        #stores class name
         class_data.update(
             {
                 f"name-{i}": request.form.get(f"name-{i}") 
@@ -121,6 +129,7 @@ def process_grade_route(route, template):
             }
         )
 
+        #stores grade-level
         class_data.update(
             {
                 f"grade-level-{i}": request.form.get(f"grade-level-{i}") 
